@@ -17,6 +17,7 @@
     Module.call(this);
     this.MODEL_URL = MODEL_URL;
     this.process = false;
+    this.lastFaceDescriptor = [];
   }
 
   face.prototype = proto =
@@ -47,15 +48,15 @@
   }
 
   proto.getDescription = async function (image) {
-    if (image == null || this.process) {
-      console.log("getDescription skip...");
+    if (image == null) {
       return [];
     }
+    if (this.process) {
+      return this.lastFaceDescriptor;
+    }
     this.process = true;
-    console.log("getDescription start...");
     var tmpData = ("" + image);
     if (tmpData.split(',').length == 128) {
-      console.log("getDescription done.");
       return tmpData.split(',');
     }
     var imageType = tmpData.substring(0, 4);
@@ -71,11 +72,10 @@
       var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
       var faceDescriptor = descriptor.descriptor;
       this.process = false;
-      console.log("getDescription done.");
+      this.lastFaceDescriptor = faceDescriptor;
       return faceDescriptor;
     } else {
       this.process = false;
-      console.log("getDescription done.");
       return [];
     }
   }
