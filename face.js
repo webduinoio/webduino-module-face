@@ -48,6 +48,7 @@
 
   proto.getDescription = async function (image) {
     if (image == null || this.process) {
+      console.log("getDescription skip...");
       return [];
     }
     this.process = true;
