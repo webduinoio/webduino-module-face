@@ -1,7 +1,6 @@
 # webduino-module-face-api
 
-Webduino Module for face-api.
-
+Webduino Module for [face-api.js](https://github.com/justadudewhohacks/face-api.js).
 
 ## Installation
 
