@@ -1,8 +1,13 @@
 Blockly.Blocks['face_load'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("載入人臉模型檔案")
-        .appendField(new Blockly.FieldDropdown([["SSDMobileNetV1", "0"], ["TinyFaceDetector", "1"], ["TinyYolov2Model", "2"], ["MtCNN", "3"]]), "model");
+      .appendField("載入人臉模型檔案")
+      .appendField(new Blockly.FieldDropdown([
+        ["SSDMobileNetV1", "0"],
+        ["TinyFaceDetector", "1"],
+        ["TinyYolov2Model", "2"],
+        ["MtCNN", "3"]
+      ]), "model");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);
@@ -25,13 +30,13 @@ Blockly.Blocks['face_get_description'] = {
 };
 
 Blockly.Blocks['face_get_euclideanDistance'] = {
-  init: function() {
+  init: function () {
     this.appendValueInput("faceA")
-        .setCheck(null)
-        .appendField("比對臉部特徵值：");
+      .setCheck(null)
+      .appendField("比對臉部特徵值：");
     this.appendValueInput("faceB")
-        .setCheck(null)
-        .appendField("差異度 0~1 (0 為最小差異) ");
+      .setCheck(null)
+      .appendField("差異度 0~1 (0 為最小差異) ");
     this.setInputsInline(false);
     this.setOutput(true, null);
     this.setColour(230);
@@ -41,12 +46,14 @@ Blockly.Blocks['face_get_euclideanDistance'] = {
 };
 
 Blockly.Blocks['face_get_camera'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
       .appendField("設定")
-        .appendField(new Blockly.FieldVariable("camera"), "camera")
-        .appendField("並啟動，影像來源：")
-        .appendField(new Blockly.FieldTextInput("0"), "src");
+      .appendField(new Blockly.FieldVariable("camera"), "camera")
+      .appendField("並啟動，影像來源：")
+      .appendField(new Blockly.FieldTextInput("0"), "src")
+      .appendField("旋轉鏡頭")
+      .appendField(new Blockly.FieldCheckbox("FALSE"), "rotate");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(330);

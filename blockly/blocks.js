@@ -1,4 +1,4 @@
-Blockly.JavaScript['face_load'] = function(block) {
+Blockly.JavaScript['face_load'] = function (block) {
   var dropdown_model = block.getFieldValue('model');
   var code = 'await faceAPI.loadModel();\n';
   return code;
@@ -22,8 +22,9 @@ Blockly.JavaScript['face_get_euclideanDistance'] = function (block) {
 //https://blockly-demo.appspot.com/static/demos/blockfactory_old/index.html#g73ris
 Blockly.JavaScript['face_get_camera'] = function (block) {
   var variable_camera = Blockly.JavaScript.variableDB_.getName(block.getFieldValue('camera'), Blockly.Variables.NAME_TYPE);
+  var checkbox_rotate = block.getFieldValue('rotate') == 'TRUE';
   var text_src = block.getFieldValue('src');
-  var code = variable_camera + ' = createCamera("' + text_src + '",224,224, function(img){\n';
+  var code = variable_camera + ' = createCamera("' + text_src + '",224,224,' + checkbox_rotate + ', function(img){\n';
   code += '  ' + variable_camera + ".blobData = img;\n";
   code += '});\n';
   return code;
@@ -35,4 +36,3 @@ Blockly.JavaScript['face_get_canvas'] = function (block) {
   var code = variable_canvas + '.blobData';
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
-

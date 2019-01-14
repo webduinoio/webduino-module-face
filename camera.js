@@ -7,6 +7,15 @@ let Camera = (function () {
     // camType: 0,1,2 or http://192.168.0.11/jpg or ws://192.168.43.110:8889/rws/ws
     constructor(camType) {
       this.setCamType(camType);
+      this.setRotateCam(0)
+    }
+
+    setRotateCam(degree) {
+      this.rotateCam = degree;
+    }
+
+    getRotateCam() {
+      return this.rotateCam;
     }
 
     setCamType(camType) {
@@ -81,8 +90,8 @@ let Camera = (function () {
           break;
         case jpgCam:
           // http://192.168.43.201:9966/ok.png
-          console.log("JPGCam:", this.camType);
-          console.log("URL:", this.URL);
+          console.log("JPGCam:", this.camType, " ,URL:", this.URL);
+          //this.setRotateCam(90);
           break;
       }
     }
@@ -104,7 +113,6 @@ let Camera = (function () {
       }
       image.src = this.URL;
       image.onload = function () {
-        //self.drawRotated(canvas, image, 90);
         setTimeout(function () {
           if (typeof callback == 'function') {
             callback(image);
@@ -141,6 +149,9 @@ let Camera = (function () {
             self.onImage(document.createElement('img'), function (img) {
               var ctx = canvas.getContext('2d');
               ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+              if (self.getRotateCam() > 0) {
+                self.drawRotated(canvas, img, 90);
+              }
               if (typeof callback == 'function') {
                 callback(canvas);
               }
