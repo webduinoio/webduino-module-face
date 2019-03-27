@@ -10,19 +10,10 @@
     c1.height = height;
     document.body.appendChild(c1);
     var cam = new Camera(camSource);
-    cam.blobData = null;
-    cam.onCanvas(c1, function (c) {
-      var ctx = c.getContext("2d");
-      if (rotate) {
-        var ox = c.width / 2;
-        var oy = c.height / 2;
-        ctx.translate(ox, oy);
-        ctx.rotate((Math.PI / 180) * 90);
-        ctx.translate(-ox, -oy);
-        rotate = false;
-      }
-      var img = new Image();
-      img.src = c.toDataURL();
+    if(rotate){
+      cam.setRotate(90);
+    }
+    cam.onCanvas(c1, function (c,img) {
       callback(img);
     });
     return cam;
