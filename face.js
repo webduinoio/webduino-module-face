@@ -68,15 +68,17 @@
     }
     var singleFace = await faceapi.detectSingleFace(input);
     if (typeof singleFace === 'object') {
-      var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
-      var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
-      var faceDescriptor = descriptor.descriptor;
-      this.process = false;
-      this.lastFaceDescriptor = faceDescriptor;
-      return faceDescriptor;
-    } else {
-      this.process = false;
-      return [];
+      try {
+        var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
+        var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
+        var faceDescriptor = descriptor.descriptor;
+        this.lastFaceDescriptor = faceDescriptor;
+        this.process = false;
+        return faceDescriptor;
+      } catch (e) {
+        console.log("face detect:", e);
+        return [];
+      }
     }
   }
 
