@@ -72,7 +72,7 @@
         var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
         var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
         var faceDescriptor = descriptor.descriptor;
-        faceDescriptor == 'undefined' ? [] : faceDescriptor;
+        faceDescriptor = typeof faceDescriptor == 'undefined' ? [] : faceDescriptor;
         this.lastFaceDescriptor = faceDescriptor;
         this.process = false;
         return this.lastFaceDescriptor;
