@@ -74,7 +74,7 @@
         var faceDescriptor = descriptor.descriptor;
         this.lastFaceDescriptor = faceDescriptor;
         this.process = false;
-        return faceDescriptor;
+        return faceDescriptor == 'undefined' ? [] : faceDescriptor;
       } catch (e) {
         console.log("face detect:", e);
         return [];
