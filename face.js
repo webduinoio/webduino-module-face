@@ -51,10 +51,10 @@
     if (image == null) {
       return [];
     }
-    if (this.process) {
+    if (this.processing) {
       return this.lastFaceDescriptor;
     }
-    this.process = true;
+    this.processing = true;
     var tmpData = ("" + image);
     if (tmpData.split(',').length == 128) {
       return tmpData.split(',');
@@ -71,7 +71,7 @@
       try {
         var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
         var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
-        this.process = false;
+        this.processing = false;
         if (typeof descriptor.descriptor == 'undefined') {
           return [];
         }
@@ -79,15 +79,17 @@
         return this.lastFaceDescriptor;
       } catch (e) {
         console.log("face detect Error:", e);
+        this.processing = false;
         return [];
       }
     } else {
+      this.processing = false;
       return [];
     }
   }
 
   proto.loadModel = async function () {
-    console.log("load face model...");
+    console.log("load face model...v2");
     //await faceapi.loadTinyFaceDetectorModel(this.MODEL_URL)
     await faceapi.loadSsdMobilenetv1Model(this.MODEL_URL);
     //await faceapi.loadMtcnnModel(this.MODEL_URL);
