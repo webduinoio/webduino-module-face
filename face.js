@@ -71,21 +71,21 @@
       try {
         var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
         var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
-        var faceDescriptor = descriptor.descriptor;
-        faceDescriptor = typeof faceDescriptor == 'undefined' ? [] : faceDescriptor;
-        this.lastFaceDescriptor = faceDescriptor;
         this.process = false;
+        if (typeof descriptor.descriptor == 'undefined') {
+          return [];
+        }
+        this.lastFaceDescriptor = descriptor.descriptor;
         return this.lastFaceDescriptor;
       } catch (e) {
-        console.log("get face err:", e);
-        this.process = false;
+        console.log("face detect Error:", e);
         return [];
       }
     }
   }
 
   proto.loadModel = async function () {
-    console.log("load face model...");
+    console.log("load face model...v1");
     //await faceapi.loadTinyFaceDetectorModel(this.MODEL_URL)
     await faceapi.loadSsdMobilenetv1Model(this.MODEL_URL);
     //await faceapi.loadMtcnnModel(this.MODEL_URL);
