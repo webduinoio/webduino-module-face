@@ -8,7 +8,7 @@
   ],
   "dependencies": [
     "camera.js",
-    "face-api.js",
+    "face-api-new.js",
     "face.js",
     "face-blockly.js"
   ],
