@@ -81,11 +81,13 @@
         console.log("face detect Error:", e);
         return [];
       }
+    } else {
+      return [];
     }
   }
 
   proto.loadModel = async function () {
-    console.log("load face model...v1");
+    console.log("load face model...");
     //await faceapi.loadTinyFaceDetectorModel(this.MODEL_URL)
     await faceapi.loadSsdMobilenetv1Model(this.MODEL_URL);
     //await faceapi.loadMtcnnModel(this.MODEL_URL);
