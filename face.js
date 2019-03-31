@@ -77,7 +77,7 @@
         this.process = false;
         return this.lastFaceDescriptor;
       } catch (e) {
-        console.log("face detect Error:", e);
+        console.log("get face err:", e);
         this.process = false;
         return [];
       }
