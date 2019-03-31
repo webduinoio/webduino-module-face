@@ -72,11 +72,13 @@
         var faceLandmarks = await faceapi.detectSingleFace(input).withFaceLandmarks();
         var descriptor = await faceapi.detectSingleFace(input).withFaceLandmarks().withFaceDescriptor();
         var faceDescriptor = descriptor.descriptor;
+        faceDescriptor == 'undefined' ? [] : faceDescriptor;
         this.lastFaceDescriptor = faceDescriptor;
         this.process = false;
-        return faceDescriptor == 'undefined' ? [] : faceDescriptor;
+        return this.lastFaceDescriptor;
       } catch (e) {
-        console.log("face detect:", e);
+        console.log("face detect Error:", e);
+        this.process = false;
         return [];
       }
     }
