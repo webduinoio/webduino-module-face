@@ -1,12 +1,13 @@
 {
 
-  "types": ["face_get_description", "face_get_euclideanDistance","face_get_camera"],
+  "types": ["face_get_description", "face_get_euclideanDistance", "face_get_camera"],
   "category": "toolbox",
   "scripts": [
     "blockly/blocks.js",
     "blockly/javascript.js"
   ],
   "dependencies": [
+    "tfjs@0.14.1.js",
     "camera.js",
     "face-api-new.js",
     "face.js",
